@@ -1,0 +1,26 @@
+[project]
+name = "hyresbostader-utility"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Marcus Gotling", email = "marcus@gotling.se" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "aiohttp>=3.14.5",
+    "beautifulsoup4>=4.15.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]

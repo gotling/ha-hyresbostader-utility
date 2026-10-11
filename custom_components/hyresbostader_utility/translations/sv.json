@@ -1,0 +1,54 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Logga in med ditt konto på Hyresbostäders \"Mina sidor\".",
+        "data": {
+          "username": "Användarnamn",
+          "password": "Lösenord"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Logga in igen",
+        "description": "Ange det nya lösenordet för {username}.",
+        "data": {
+          "password": "Lösenord"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Fel användarnamn eller lösenord",
+      "cannot_connect": "Kunde inte ansluta",
+      "unknown": "Oväntat fel"
+    },
+    "abort": {
+      "already_configured": "Kontot är redan konfigurerat",
+      "reauth_successful": "Inloggningen uppdaterades"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "current_week": {
+        "name": "Denna vecka"
+      },
+      "previous_week": {
+        "name": "Förra veckan"
+      },
+      "current_year": {
+        "name": "I år"
+      },
+      "previous_year": {
+        "name": "Förra året"
+      },
+      "current_week_average": {
+        "name": "Medel denna vecka"
+      },
+      "previous_week_average": {
+        "name": "Medel förra veckan"
+      },
+      "last_reading": {
+        "name": "Senaste avläsning"
+      }
+    }
+  }
+}

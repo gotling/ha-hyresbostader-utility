@@ -1,0 +1,182 @@
+{
+  "currentPeriod": {
+    "year": 2026,
+    "value": "2026",
+    "label": "",
+    "periodLabel": "2026",
+    "summary": {
+      "value": "5,68",
+      "id": "\/Date(1767222000000+0100)\/"
+    },
+    "previousPeriodLabel": "2026",
+    "id": "\/Date(1767222000000+0100)\/",
+    "type": "År",
+    "maxDataValue": 25.018064516129034,
+    "start": "\/Date(1767222000000+0100)\/",
+    "end": "\/Date(1798671600000+0100)\/",
+    "data": [
+      {
+        "id": 0,
+        "value": "0",
+        "label": "J",
+        "labelLong": "Januari"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "F",
+        "labelLong": "Februari"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "M",
+        "labelLong": "Mars"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "A",
+        "labelLong": "April"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "M",
+        "labelLong": "Maj"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "J",
+        "labelLong": "Juni"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "J",
+        "labelLong": "Juli"
+      },
+      {
+        "id": 0,
+        "value": "25,02",
+        "label": "A",
+        "labelLong": "Augusti"
+      },
+      {
+        "id": 0,
+        "value": "21,88",
+        "label": "S",
+        "labelLong": "September"
+      },
+      {
+        "id": 0,
+        "value": "21,3",
+        "label": "O",
+        "labelLong": "Oktober"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "N",
+        "labelLong": "November"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "D",
+        "labelLong": "December"
+      }
+    ]
+  },
+  "previousPeriod": {
+    "year": 2025,
+    "value": "2025",
+    "label": "",
+    "periodLabel": "2025",
+    "summary": {
+      "value": "0",
+      "id": "\/Date(1735686000000+0100)\/"
+    },
+    "previousPeriodLabel": "2025",
+    "id": "\/Date(1735686000000+0100)\/",
+    "type": "År",
+    "maxDataValue": 0.0,
+    "start": "\/Date(1735686000000+0100)\/",
+    "end": "\/Date(1767135600000+0100)\/",
+    "data": [
+      {
+        "id": 0,
+        "value": "0",
+        "label": "J",
+        "labelLong": "Januari"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "F",
+        "labelLong": "Februari"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "M",
+        "labelLong": "Mars"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "A",
+        "labelLong": "April"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "M",
+        "labelLong": "Maj"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "J",
+        "labelLong": "Juni"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "J",
+        "labelLong": "Juli"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "A",
+        "labelLong": "Augusti"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "S",
+        "labelLong": "September"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "O",
+        "labelLong": "Oktober"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "N",
+        "labelLong": "November"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "D",
+        "labelLong": "December"
+      }
+    ]
+  }
+}

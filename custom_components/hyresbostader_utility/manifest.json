@@ -1,0 +1,11 @@
+{
+  "domain": "hyresbostader_utility",
+  "name": "Hyresbostäder Utility",
+  "codeowners": [],
+  "config_flow": true,
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "loggers": ["custom_components.hyresbostader_utility"],
+  "requirements": ["beautifulsoup4>=4.12.0"],
+  "version": "0.1.0"
+}

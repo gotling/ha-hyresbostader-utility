@@ -1,0 +1,11 @@
+{
+  "$id": "1",
+  "number": "000000-0000:GT:A1",
+  "mediaTypeId": 2,
+  "id": 1005,
+  "apartmentId": 1000,
+  "lastCountNum": 21.29,
+  "lastCountTime": "\/Date(1791669600000+0200)\/",
+  "name": "Temperatur",
+  "unit": "°C"
+}

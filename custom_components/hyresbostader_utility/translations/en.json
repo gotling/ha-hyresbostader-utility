@@ -1,0 +1,54 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Log in with your Hyresbostäder \"Mina sidor\" account.",
+        "data": {
+          "username": "Username",
+          "password": "Password"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reauthenticate",
+        "description": "Enter the new password for {username}.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid username or password",
+      "cannot_connect": "Failed to connect",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Account is already configured",
+      "reauth_successful": "Reauthentication was successful"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "current_week": {
+        "name": "Current week"
+      },
+      "previous_week": {
+        "name": "Previous week"
+      },
+      "current_year": {
+        "name": "Current year"
+      },
+      "previous_year": {
+        "name": "Previous year"
+      },
+      "current_week_average": {
+        "name": "Current week average"
+      },
+      "previous_week_average": {
+        "name": "Previous week average"
+      },
+      "last_reading": {
+        "name": "Last reading"
+      }
+    }
+  }
+}

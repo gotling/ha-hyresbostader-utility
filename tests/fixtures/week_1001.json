@@ -1,0 +1,122 @@
+{
+  "currentPeriod": {
+    "year": 2026,
+    "value": "41",
+    "label": "2026-10-05 - 2026-10-11",
+    "periodLabel": "Vecka 41",
+    "summary": {
+      "value": "594",
+      "id": "\/Date(1791151200000+0200)\/"
+    },
+    "previousPeriodLabel": "Vecka 41",
+    "id": "\/Date(1791151200000+0200)\/",
+    "type": "Vecka",
+    "maxDataValue": 167.0,
+    "start": "\/Date(1791151200000+0200)\/",
+    "end": "\/Date(1791669600000+0200)\/",
+    "data": [
+      {
+        "id": 0,
+        "value": "167",
+        "label": "M",
+        "labelLong": "Måndag 5/10"
+      },
+      {
+        "id": 0,
+        "value": "86",
+        "label": "T",
+        "labelLong": "Tisdag 6/10"
+      },
+      {
+        "id": 0,
+        "value": "137",
+        "label": "O",
+        "labelLong": "Onsdag 7/10"
+      },
+      {
+        "id": 0,
+        "value": "153",
+        "label": "T",
+        "labelLong": "Torsdag 8/10"
+      },
+      {
+        "id": 0,
+        "value": "51",
+        "label": "F",
+        "labelLong": "Fredag 9/10"
+      },
+      {
+        "id": 0,
+        "value": "0",
+        "label": "L",
+        "labelLong": "Lördag 10/10"
+      },
+      {
+        "id": 0,
+        "value": null,
+        "label": "S",
+        "labelLong": null
+      }
+    ]
+  },
+  "previousPeriod": {
+    "year": 2026,
+    "value": "40",
+    "label": "2026-09-28 - 2026-10-04",
+    "periodLabel": "Vecka 40",
+    "summary": {
+      "value": "751",
+      "id": "\/Date(1790546400000+0200)\/"
+    },
+    "previousPeriodLabel": "Vecka 40",
+    "id": "\/Date(1790546400000+0200)\/",
+    "type": "Vecka",
+    "maxDataValue": 243.0,
+    "start": "\/Date(1790546400000+0200)\/",
+    "end": "\/Date(1791064800000+0200)\/",
+    "data": [
+      {
+        "id": 0,
+        "value": "148",
+        "label": "M",
+        "labelLong": "Måndag 28/9"
+      },
+      {
+        "id": 0,
+        "value": "117",
+        "label": "T",
+        "labelLong": "Tisdag 29/9"
+      },
+      {
+        "id": 0,
+        "value": "243",
+        "label": "O",
+        "labelLong": "Onsdag 30/9"
+      },
+      {
+        "id": 0,
+        "value": "134",
+        "label": "T",
+        "labelLong": "Torsdag 1/10"
+      },
+      {
+        "id": 0,
+        "value": "109",
+        "label": "F",
+        "labelLong": "Fredag 2/10"
+      },
+      {
+        "id": 0,
+        "value": null,
+        "label": "L",
+        "labelLong": null
+      },
+      {
+        "id": 0,
+        "value": null,
+        "label": "S",
+        "labelLong": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$id": "1",
+  "number": "000000-0000:KV:A1",
+  "mediaTypeId": 7,
+  "id": 1001,
+  "apartmentId": 1000,
+  "lastCountNum": 465.845,
+  "lastCountTime": "\/Date(1791669540000+0200)\/",
+  "name": "Kallvatten",
+  "unit": "Liter"
+}

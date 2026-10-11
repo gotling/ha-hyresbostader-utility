@@ -172,9 +172,9 @@ async def test_login_posts_credentials_and_aspnet_fields(session, base_url, port
     assert form[FIELD_USERNAME] == USERNAME
     assert form[FIELD_PASSWORD] == PASSWORD
     assert form[FIELD_LOGIN_BUTTON] == "Logga in"
-    assert form["__VIEWSTATE"].startswith("/wEPDwUKMTY4ODMzNjQ5OQ")
+    assert form["__VIEWSTATE"] == "TestViewState"
     assert form["__VIEWSTATEGENERATOR"] == "7B3D0533"
-    assert form["__EVENTVALIDATION"].startswith("/wEdAA7k")
+    assert form["__EVENTVALIDATION"] == "TestEventValidation"
     # Other buttons (search, BankID) must not be posted.
     assert "ctl00$ctl01$SearchSimple$btnSearch2" not in form
     assert not any("BankId" in key for key in form)

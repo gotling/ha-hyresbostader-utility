@@ -1,10 +1,12 @@
 {
   "domain": "hyresbostader_utility",
   "name": "Hyresbostäder Utility",
-  "codeowners": [],
+  "codeowners": ["@gotling"],
   "config_flow": true,
+  "documentation": "https://github.com/gotling/ha-hyresbostader-utility",
   "integration_type": "service",
   "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/gotling/ha-hyresbostader-utility/issues",
   "loggers": ["custom_components.hyresbostader_utility"],
   "requirements": ["beautifulsoup4>=4.12.0"],
   "version": "0.1.0"

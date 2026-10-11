@@ -16,6 +16,7 @@ Home Assistant custom integration that fetches water usage (hot and cold) and te
 
 ## Layout
 - `custom_components/hyresbostader_utility/` — the actual HA integration (this is what gets installed into HA). `api.py` (portal/IMD client, no HA imports), `coordinator.py` (hourly `DataUpdateCoordinator`, re-logs in to rediscover userId on errors), `config_flow.py` (user + reauth), `sensor.py` (one device per meter; sensor set chosen by unit), `translations/` (en, sv; `strings.json` is a copy of en).
+- HACS: `hacs.json`, `README.md`, `LICENSE` (MIT) at the root; `manifest.json` `version` must be bumped for releases (HACS uses GitHub releases/tags). Brand icon ships locally in `custom_components/hyresbostader_utility/brand/` (HA serves custom integration brand images from there). `.github/workflows/validate.yml` runs HACS action, hassfest and pytest. Repo: https://github.com/gotling/ha-hyresbostader-utility. Fixtures are anonymized (userId `TestUserId1=`, meter ids 1001–1005); never commit real identifiers.
 - `tests/` — unit tests; `tests/fixtures/` holds real HTML of the login page, a failed-login response, the IMD dashboard, and ChangeMeter, week and year JSON for meters 1001 and 1005.
 
 ## API endpoints
@@ -40,25 +41,6 @@ First meter needs to be changed, then fetch. Verified behaviour:
 - GetCurrentAndPreviousPeriod JSON: `currentPeriod`/`previousPeriod` with `periodLabel`, `start`, `end`, `summary.value` (week total; average for temperature), `data[]` (7 days, `value` null if not reported).
 - `GET /IMD/Dashboard/ChangePeriodType?periodName=År|Vecka&userId=...` switches the period type (session state, kept across ChangeMeter and across refreshes, so always set explicitly). It returns the current period JSON; GetCurrentAndPreviousPeriod then returns `currentPeriod`/`previousPeriod` for that type. "År" = current/previous year with 12 monthly `data[]` values (`labelLong` = "Januari"...). For temperature the year `summary` is an average including empty months (e.g. 5,68), so it's not meaningful.
 - Numbers are strings with Swedish decimal comma ("21,46"); dates are `/Date(epochms+0200)/`.
-
-#### Warm water
-
-https://imd.hyresbostader.se/IMD/Dashboard/ChangeMeter?meterId=1002&userId=TestUserId1%3d
-
-https://imd.hyresbostader.se/IMD/Dashboard/GetCurrentAndPreviousPeriod?userId=TestUserId1%3d
-
-#### Cold water
-
-https://imd.hyresbostader.se/IMD/Dashboard/ChangeMeter?meterId=1001&userId=TestUserId1%3d
-
-https://imd.hyresbostader.se/IMD/Dashboard/GetCurrentAndPreviousPeriod?userId=TestUserId1%3d
-
-#### Temperature
-
-https://imd.hyresbostader.se/IMD/Dashboard/ChangeMeter?meterId=1005&userId=TestUserId1%3d
-
-https://imd.hyresbostader.se/IMD/Dashboard/GetCurrentAndPreviousPeriod?userId=TestUserId1%3d
-
 
 ## Home Assistant Architecture
 - Domain: `hyresbostader_utility`

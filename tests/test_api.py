@@ -1,7 +1,8 @@
 """Tests for the Hyresbostäder API client."""
 
 import json
-from datetime import datetime, timedelta, timezone
+from dataclasses import replace
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import aiohttp
@@ -17,6 +18,7 @@ from custom_components.hyresbostader_utility.api import (
     HyresbostaderAuthError,
     HyresbostaderConnectionError,
     Meter,
+    has_readings_until,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -275,6 +277,50 @@ async def test_get_meter_data(session, base_url, portal):
     assert cold.current_week.values[0].label == "Måndag 5/10"
     assert cold.previous_week.label == "Vecka 40"
     assert cold.previous_week.total == 751
+
+
+async def test_period_daily_values(session, base_url, portal):
+    portal.imd_dashboard_page = TWO_METER_DASHBOARD
+
+    cold = (await _api(session, base_url).async_get_meter_data(USER_ID))["1001"]
+
+    # Days without a reported value (None) are left out.
+    assert cold.previous_week.daily_values() == [
+        (date(2026, 9, 28), 148),
+        (date(2026, 9, 29), 117),
+        (date(2026, 9, 30), 243),
+        (date(2026, 10, 1), 134),
+        (date(2026, 10, 2), 109),
+    ]
+    assert cold.current_week.daily_values()[-1] == (date(2026, 10, 10), 0)
+
+
+async def test_meter_key_is_number(session, base_url, portal):
+    portal.imd_dashboard_page = TWO_METER_DASHBOARD
+
+    data = await _api(session, base_url).async_get_meter_data(USER_ID)
+
+    assert data["1001"].key == "000000-0000:KV:A1"
+    assert data["1005"].key == "000000-0000:GT:A1"
+
+
+async def test_has_readings_until(session, base_url, portal):
+    portal.imd_dashboard_page = TWO_METER_DASHBOARD
+    meters = list((await _api(session, base_url).async_get_meter_data(USER_ID)).values())
+    # Kallvatten is read 10/10 23:59, Temperatur 11/10 00:00.
+
+    assert has_readings_until(meters, datetime(2026, 10, 11, tzinfo=CEST))
+    assert not has_readings_until(meters, datetime(2026, 10, 12, tzinfo=CEST))
+
+
+async def test_has_readings_until_ignores_meters_without_readings(session, base_url, portal):
+    portal.imd_dashboard_page = TWO_METER_DASHBOARD
+    meters = list((await _api(session, base_url).async_get_meter_data(USER_ID)).values())
+    unused = replace(meters[0], last_count_time=datetime(2026, 10, 11, 9, 30, tzinfo=CEST))
+
+    assert has_readings_until([*meters, unused], datetime(2026, 10, 11, tzinfo=CEST))
+    # Without any real reading there is nothing to tell whether data is current.
+    assert not has_readings_until([unused], datetime(2026, 10, 11, tzinfo=CEST))
 
 
 async def test_get_meter_data_year(session, base_url, portal):

@@ -5,8 +5,9 @@ from __future__ import annotations
 import asyncio
 import logging
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
@@ -76,6 +77,15 @@ class Period:
     total: float | None
     values: list[PeriodValue]
 
+    def daily_values(self) -> list[tuple[date, float]]:
+        """Reported (date, value) pairs of a week period, which has one value per day."""
+        first_day = self.start.date()
+        return [
+            (first_day + timedelta(days=index), item.value)
+            for index, item in enumerate(self.values)
+            if item.value is not None
+        ]
+
 
 @dataclass(frozen=True)
 class MeterData:
@@ -91,6 +101,25 @@ class MeterData:
     previous_week: Period
     current_year: Period
     previous_year: Period
+
+    @property
+    def key(self) -> str:
+        """Stable identifier: the meter number survives the portal renumbering its meter ids."""
+        return self.number or self.id
+
+
+# Readings are stamped at the end of the day they cover (23:59 or 00:00).
+_END_OF_DAY_MARGIN = timedelta(hours=1)
+
+
+def has_readings_until(meters: Iterable[MeterData], day_start: datetime) -> bool:
+    """Return True if every meter with readings has one for the day before day_start.
+
+    Meters without readings (e.g. an unused Sköljmedel) report the time of the
+    request as their last reading, so times after day_start are ignored.
+    """
+    times = [m.last_count_time for m in meters if m.last_count_time <= day_start]
+    return bool(times) and all(t >= day_start - _END_OF_DAY_MARGIN for t in times)
 
 
 class HyresbostaderAPI:

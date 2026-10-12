@@ -4,9 +4,11 @@ from __future__ import annotations
 
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from .api import HyresbostaderAPI
+from .const import DOMAIN
 from .coordinator import HyresbostaderConfigEntry, HyresbostaderCoordinator
 
 PLATFORMS = [Platform.SENSOR]
@@ -29,3 +31,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: HyresbostaderConfigEntry
 async def async_unload_entry(hass: HomeAssistant, entry: HyresbostaderConfigEntry) -> bool:
     """Unload a config entry."""
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+
+
+async def async_remove_config_entry_device(
+    hass: HomeAssistant, entry: HyresbostaderConfigEntry, device_entry: dr.DeviceEntry
+) -> bool:
+    """Allow deleting a device whose meter is no longer on the portal."""
+    return not any(
+        domain == DOMAIN and key in entry.runtime_data.data
+        for domain, key in device_entry.identifiers
+    )

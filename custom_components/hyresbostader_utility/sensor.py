@@ -173,10 +173,10 @@ class HyresbostaderSensor(CoordinatorEntity[HyresbostaderCoordinator], SensorEnt
     ) -> None:
         super().__init__(coordinator)
         self.entity_description = description
-        self._meter_id = data.id
-        self._attr_unique_id = f"{data.id}_{description.key}"
+        self._meter_key = data.key
+        self._attr_unique_id = f"{data.key}_{description.key}"
         self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, data.id)},
+            identifiers={(DOMAIN, data.key)},
             name=data.name,
             manufacturer=MANUFACTURER,
             model=data.name,
@@ -185,7 +185,7 @@ class HyresbostaderSensor(CoordinatorEntity[HyresbostaderCoordinator], SensorEnt
 
     @property
     def _data(self) -> MeterData | None:
-        return self.coordinator.data.get(self._meter_id)
+        return self.coordinator.data.get(self._meter_key)
 
     @property
     def available(self) -> bool:

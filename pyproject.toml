@@ -1,6 +1,6 @@
 [project]
 name = "hyresbostader-utility"
-version = "0.1.0"
+version = "0.2.0"
 description = "Home Assistant integration for water usage and temperature from the Hyresbostäder tenant portal"
 authors = [
     { name = "Marcus Gotling", email = "marcus@gotling.se" }

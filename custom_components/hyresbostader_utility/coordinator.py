@@ -8,14 +8,17 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.util import dt as dt_util
 
 from .api import (
     HyresbostaderAPI,
     HyresbostaderAuthError,
     HyresbostaderConnectionError,
     MeterData,
+    has_readings_until,
 )
 from .const import CONF_USER_ID, DOMAIN, UPDATE_INTERVAL
+from .statistics import async_import_statistics
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -23,7 +26,7 @@ type HyresbostaderConfigEntry = ConfigEntry[HyresbostaderCoordinator]
 
 
 class HyresbostaderCoordinator(DataUpdateCoordinator[dict[str, MeterData]]):
-    """Fetches readings for all meters, keyed by meter id."""
+    """Fetches readings for all meters, keyed by MeterData.key."""
 
     config_entry: HyresbostaderConfigEntry
 
@@ -43,6 +46,17 @@ class HyresbostaderCoordinator(DataUpdateCoordinator[dict[str, MeterData]]):
         self.api = api
 
     async def _async_update_data(self) -> dict[str, MeterData]:
+        # Meters report once a day, so once yesterday's readings are in there
+        # is nothing new until tomorrow.
+        if self.data and has_readings_until(self.data.values(), dt_util.start_of_local_day()):
+            _LOGGER.debug("Readings for yesterday already fetched, skipping until tomorrow")
+            return self.data
+        meters = await self._async_fetch()
+        data = {meter.key: meter for meter in meters.values()}
+        await async_import_statistics(self.hass, data)
+        return data
+
+    async def _async_fetch(self) -> dict[str, MeterData]:
         user_id = self.config_entry.data[CONF_USER_ID]
         try:
             return await self.api.async_get_meter_data(user_id)

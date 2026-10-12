@@ -7,6 +7,9 @@ Home Assistant integration that reads the individual metering ("Min förbrukning
 
 This is an unofficial integration and is not affiliated with Hyresbostäder.
 
+> [!NOTE]
+> This integration has been developed with the help of [Claude](https://claude.com/claude-code), an AI assistant by Anthropic.
+
 ## Installation
 
 ### HACS
@@ -27,7 +30,7 @@ Copy `custom_components/hyresbostader_utility` into the `custom_components` fold
 
 ## Sensors
 
-One device is created per meter found on the portal. Data is polled once per hour.
+One device is created per meter found on the portal. Meters report once a day: the portal is polled hourly until yesterday's readings are in, then not again until the next day. A device for a meter that is no longer on the portal can be deleted from its device page.
 
 | Meter | Sensors |
 | --- | --- |
@@ -36,6 +39,10 @@ One device is created per meter found on the portal. Data is polled once per hou
 | Other meters (e.g. Tvättar, Sköljmedel) | Current week, Previous week, Current year, Previous year, Last reading |
 
 Period sensors have the period label, start, end and the per-day (week) or per-month (year) values as attributes.
+
+## Daily statistics
+
+The daily consumption of each meter (except temperature) is imported into long-term statistics, dated to the day it belongs to rather than when it was fetched. The statistics are named e.g. "Hyresbostäder Kallvatten" (`hyresbostader_utility:<meter id>_consumption`) and can be used as a water source in the energy dashboard or in a statistics graph card with a daily period. Each update rewrites the current and previous week, so days that are reported late are filled in; history before the first import is not available.
 
 ## Development
 
